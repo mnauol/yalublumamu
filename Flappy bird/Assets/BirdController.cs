@@ -8,6 +8,7 @@ public class BirdController : MonoBehaviour
 {
     public float JumpForce;
     public Rigidbody2D Rigidbody2D;
+    public float MaxVelocityY;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,12 @@ public class BirdController : MonoBehaviour
         if(Input.GetButtonDown("Jump"))
         {
             Debug.Log("ButtonPressed" + JumpForce.ToString());
+            Rigidbody2D.velocity = Vector2.zero;
             Rigidbody2D.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+        }
+        if(Rigidbody2D.velocity.y > MaxVelocityY)
+        {
+            Rigidbody2D.velocity = new Vector2(0, MaxVelocityY);
         }
     }
 }
